@@ -1,7 +1,7 @@
-diff --git a/data/config b/data/config
+diff --git a/data/openhybrid.conf b/data/openhybrid.conf
 index 64ffe49..1b44b30 100644
---- a/data/config
-+++ b/data/config
+--- a/data/openhybrid.conf
++++ b/data/openhybrid.conf
 @@ -30,7 +30,7 @@
  #hello retry times = 10
  
