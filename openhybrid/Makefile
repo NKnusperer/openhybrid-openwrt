@@ -10,7 +10,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/openhybrid-$(PKG_VERSION)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/NKnusperer/openhybrid.git
-PKG_SOURCE_VERSION:=5d0fe471268679a555a4e93275bcfb7ecea591a9
+PKG_SOURCE_VERSION:=82d9755bb794e4d8d5591a2c6bfe5c3d7c049467
 PKG_MIRROR_HASH:=skip
 
 include $(INCLUDE_DIR)/package.mk
@@ -35,9 +35,7 @@ TARGET_LDFLAGS += -Wl,--as-needed -Wl,--sort-common -Wl,--hash-style=gnu
 define Package/openhybrid/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/openhybrid $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-event $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-route $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/script/openhybrid-lte $(1)/usr/sbin/
+	$(INSTALL_BIN) ./files/openhybrid-event $(1)/usr/sbin/
 
 	$(INSTALL_DIR) $(1)/etc/openhybrid
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/data/openhybrid.conf $(1)/etc/openhybrid/

@@ -1,0 +1,54 @@
+#!/bin/sh
+
+set -e
+
+# List of all events:
+#		startup: OpenHybrid started.
+#		shutdown: OpenHybrid stopped.
+#		tunneldown: Tunnel device destroyed.
+#		tunnelup: Tunnel device created.
+#		dhcpup_ip: IPv4 address obtained.
+#		dhcpup_ip6: IPv6 prefix obtained.
+#		dhcpdown_ip: iPv4 address lease expired.
+#		dhcpdown_ip6: iPv6 prefix lease expired.
+
+# List of all environment variables:
+#		lte_interface_name: LTE interface name.
+#		dsl_interface_name: DSL interface name (Bonding mode only).
+#		tunnel_interface_name: Tunnel interface name (Bonding mode only).
+#		tunnel_interface_mtu: Tunnel interfaces mtu.
+#		dhcp_ip: Public iPv4 address.
+#		dhcp_lease_time: Public iPv4 address lease time in seconds.
+#		dhcp6_prefix_address: Public IPv6 prefix address.
+#		dhcp6_prefix_length: Public IPv6 prefix length.
+#		dhcp6_lease_time: Public iPv6 prefix address and length lease time in seconds.
+
+
+main(){
+	event="${1}"
+
+	case "${event}" in
+		dhcpup_ip)
+			uci set network.openhybrid.device=${tunnel_interface_name}
+			uci set network.openhybrid.ipaddr=${dhcp_ip}
+			uci set network.openhybrid.netmask='255.255.255.255'
+			uci commit network
+			service network reload
+			;;
+		dhcpup_ip6)
+			# TODO
+			;;
+		dhcpdown_ip)
+			uci del network.openhybrid.device
+			uci del network.openhybrid.ipaddr
+			uci del network.openhybrid.netmask
+			uci commit network
+			service network reload
+			;;
+		dhcpdown_ip6)
+			# TODO
+			;;
+	esac
+}
+
+main "${@}"

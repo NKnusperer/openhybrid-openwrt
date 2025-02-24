@@ -5,7 +5,7 @@ USE_PROCD=1
 START=99
 STOP=00
 
-CONFIG_PATH='/etc/openhybrid/config'
+CONFIG_PATH='/etc/openhybrid/openhybrid.conf'
 
 start_service() {
 	procd_open_instance
