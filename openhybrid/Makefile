@@ -21,7 +21,8 @@ define Package/openhybrid
 	TITLE:=OpenHybrid - An RFC8157 implementation.
 	URL:=https://github.com/NKnusperer/openhybrid
 	MAINTAINER:=hendrik@.0x00.to
-	DEPENDS:=+busybox-openhybrid +libmnl +gre +kmod-tun
+	DEPENDS=+libmnl
+	EXTRA_DEPENDS:=+busybox-openhybrid +gre +kmod-tun
 endef
  
 define Package/openhybrid/description
