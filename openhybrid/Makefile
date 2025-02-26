@@ -22,7 +22,7 @@ define Package/openhybrid
 	URL:=https://github.com/NKnusperer/openhybrid
 	MAINTAINER:=hendrik@.0x00.to
 	DEPENDS=+libmnl
-	EXTRA_DEPENDS:=+busybox-openhybrid +gre +kmod-tun
+	EXTRA_DEPENDS:=busybox-openhybrid, gre, kmod-tun
 endef
  
 define Package/openhybrid/description
