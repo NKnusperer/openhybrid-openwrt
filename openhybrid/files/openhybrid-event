@@ -43,8 +43,8 @@ main() {
 				;;
 			dhcpup_ip6)
 				uci set network.openhybrid.ip6prefix=${dhcp6_prefix_address}/${dhcp6_prefix_length}
-				uci add_list network.openhybrid.ip6addr=${dhcp6_prefix_address}1/128
-				uci set network.openhybrid.ip6gw='::'
+				uci add_list network.openhybrid.ip6addr=$(ip -6 addr show dev "$tunnel_interface_name" scope link | grep 'inet6' | awk '{print $2}')
+				uci set network.openhybrid.ip6gw='fe80::1'
 				uci commit network
 				service network reload
 				;;
